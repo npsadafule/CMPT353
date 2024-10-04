@@ -1,0 +1,15 @@
+1. When smoothing the CPU temperature, do you think you got a better result with LOESS or Kalman smoothing? What differences did you notice?
+
+    LOESS smoothing was good at reducing noise in stable areas, but it sometimes missed sharp changes in temperature. Kalman smoothing was better at keeping those sharp changes while still reducing the noise. Overall, Kalman smoothing seemed to give better results for tracking quick changes, while LOESS was more useful when the temperature was mostly steady.
+
+2. In the CSV files, you might have also noticed other data about the observations: accelerometer (acceleration in x, y, z directions), gyroscope (rate of turning, pitch, roll, yaw). How could those have been used to make a better prediction about the “next” latitude and longitude?
+
+    The accelerometer could help by telling us how fast the person is speeding up or slowing down, and the gyroscope could tell us the direction they are turning. By using these along with the GPS data, we could make more accurate guesses about where the person is moving next, instead of just relying on the GPS data, which can be noisy.
+
+3. [Optional] The transition matrix for the GPS Kalman filter had a sub-matrix that was [[5e-7, 34e-7], [-49e-7, 9e-7]] (which was found by regression to the true values). If you multiply that by 3e5, it looks a lot like a rotation matrix by 285°. The magnetic declination around Vancouver is about 15°. Explain that part of the transition matrix.
+
+    The transition matrix seems to work like a rotation, turning the GPS points by 285°. The magnetic declination, which is the difference between true north and magnetic north, is around 15° in Vancouver. This matrix could be adjusting for the difference between the magnetic direction and the real direction, helping the Kalman filter make better predictions about where the person is going.
+
+4. [Optional] In your calc_distance.py, temporarily set the transition_covariance values for the latitude and longitude to be very small (like 1/1000 of the corresponding observation_covariance values). This will give you a track in out.gpx that is basically "just the predictions, ignore the measurements". Have a look at the tracks on a viewer that includes a map (so you can see the track relative to roads/sidewalks). What can you infer about the predictions we're making?
+
+    By setting the transition_covariance very small, the filter will mostly rely on predictions instead of real GPS data. When looking at the resulting track on a map, it might be smoother but also less accurate. It would ignore small random jumps in the GPS data, but if there’s a big change in direction or speed, the predictions might be wrong since they don’t get updated by the real measurements.

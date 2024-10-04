@@ -1,0 +1,6 @@
+1. In the hint above, what is the result of the calculation data['timestamp']*fit.slope + fit.intercept? What is the type, and describe the values.
+
+The result of the calculation data['timestamp'] * fit.slope + fit.intercept is a pandas Series containing predicted rating values based on a linear regression model. 
+Each value in this Series represents a predicted dog rating based on the linear trend of ratings over time. These predictions are derived by applying the best-fit line to the original data, where the slope and intercept of the line are calculated using the `linregress` function. The timestamps (representing when each tweet was created) are used to calculate the predicted rating for that specific time.
+
+Type: The result is of type pandas Series.
