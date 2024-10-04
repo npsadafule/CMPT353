@@ -1,10 +1,3 @@
-<?xml version="1.0" ?>
-<gpx xmlns="http://www.topografix.com/GPX/1/0">
-  <trk>
-    <trkseg>
-      <trkpt lat="49.2773180000" lon="-123.0079250000">
-        <time>2022-06-08T18:26:46Z</time>
-      </trkpt>
-    </trkseg>
-  </trk>
-</gpx>
+version https://git-lfs.github.com/spec/v1
+oid sha256:f2955c9d6481f49756e9db2a1b7fca3c0acf70b2ed23854fd70e44c239723ec9
+size 235
