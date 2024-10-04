@@ -1,0 +1,7 @@
+1. Based on your results for the last question, do you think daily temperatures are a good way to predict population density?
+
+    Based on my results, I don't think daily temperatures are a very good way to predict population density. In the plots, there isn’t a clear pattern between temperature and population density. For example, between 15°C and 20°C, there are many outliers that make it hard to see a trend. While it seems that population density is lower below 15°C, it doesn’t decrease much when temperatures go above 25°C. However, population density seems to increase between 15°C and 25°C.
+
+2. Why might working with compressed files be faster than using uncompressed .json or .csv data?
+
+    Compressed files are smaller in size, which makes reading the data faster because there is less data to read from the disk. This speeds up input/output operations. Even though the data has to be decompressed, the overall process is faster because the computer spends less time reading large files from the disk. The smaller size also means less storage is needed, and it can help reduce the number of times the disk has to be accessed.

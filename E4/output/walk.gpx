@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/0">
+  <trk>
+    <trkseg>
+      <trkpt lat="49.2773180000" lon="-123.0079250000">
+        <time>2022-06-08T18:26:46Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
