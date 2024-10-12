@@ -1,0 +1,76 @@
+Summary for data-1:
+mean of x: 8.71769618641382
+mean of y: 12.522874034702584
+standard deviation of x: 12.15551723122202
+standard deviation of y: 6.63996400756785
+min of x: -22.635877790008944
+max of x: 35.23705548785129
+min of y: -2.565087832693213
+max of y: 27.38415261152477
+correlation between x and y: 0.9503256954375491
+Description: For data-1, we can see that the correlation between x and y is a positive number, which indicates that the data set's x and y data have a positive relation, showing that as the x variable increases, the y variable also increases.
+
+
+Summary for data-2:
+mean of x: -0.7107871267159573
+mean of y: -0.7489869764497991
+standard deviation of x: 11.481583587790734
+standard deviation of y: 6.257917998755848
+min of x: -33.2711130771198
+max of x: 27.6470003722073
+min of y: -18.621803760419063
+max of y: 14.14731499231748
+correlation between x and y: 0.9551531665750371
+Description: For data-2, we observe a positive correlation between x and y, suggesting a strong linear relationship, where increases in the x variable correspond with increases in the y variable.
+
+
+Summary for data-3:
+mean of x: 0.9689074904200939
+mean of y: 8.508535236641327
+standard deviation of x: 2.235557861057969
+standard deviation of y: 1.1493008110024525
+min of x: -2.4490643296742807
+max of x: 4.51888491755363
+min of y: 6.641734490391763
+max of y: 10.551871022804317
+correlation between x and y: 0.9819372646760661
+Description: For data-3, the correlation between x and y is strongly positive, indicating that the two variables are highly related and increase together.
+
+
+Summary for data-4:
+mean of x: 49.90508614830509
+mean of y: 18.553836525423726
+standard deviation of x: 28.50861051988193
+standard deviation of y: 16.545896442941682
+min of x: 0.0
+max of x: 87.3767
+min of y: 0.0
+max of y: 44.56504
+correlation between x and y: -0.08119306735490815
+Description: For data-4, the correlation is a slightly negative number, close to zero, which suggests that x and y might not have any linear relation. The dataset likely represents unrelated variables or random scatter.
+
+
+Summary for data-5:
+mean of x: 49.90999357843095
+mean of y: 18.555524937729086
+standard deviation of x: 28.500000943801354
+standard deviation of y: 16.540796301840782
+min of x: 4.337892453674525
+max of x: 91.0528633396976
+min of y: 0.0554975075811517
+max of y: 49.93419703633311
+correlation between x and y: -0.0882359898305888
+Description: For data-5, the weak negative correlation implies that x and y are largely independent of each other, and plotting the data would likely result in scattered, meaningless patterns.
+
+
+Summary for data-6:
+mean of x: 7.21615517960992
+mean of y: 7.602215028237295
+standard deviation of x: 11.921599067458311
+standard deviation of y: 11.764382455006647
+min of x: -24.33382075234097
+max of x: 35.402138910929
+min of y: -22.9563569970746
+max of y: 36.07987403078143
+correlation between x and y: 0.9350685662094909
+Description: For data-6, the high positive correlation indicates a strong linear relationship between x and y, where increases in x are associated with corresponding increases in y.
