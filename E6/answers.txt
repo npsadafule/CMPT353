@@ -1,0 +1,81 @@
+1. In the A/B test analysis, do you feel like we're p-hacking? How comfortable are you coming to a conclusion at p < 0.05?
+
+    I feel like we are p-hacking because the results we got from the A/B test analysis could lead to a manipulated conclusion if we focus only on one value being below 0.05. In my analysis, most p-values were above 0.05, which makes it difficult to come to a strong conclusion about the differences between groups. This indicates that we might be selectively interpreting the data in order to find significance, which would be a form of p-hacking. Therefore, I'm not comfortable coming to a conclusion based solely on p < 0.05, especially when running multiple tests, as this increases the risk of false positives.
+
+2. If we had done T-tests between each pair of sorting implementation results, how many tests would we run? If we looked for p < 0.05 in them, what would the probability be of having any false conclusions, just by chance? That's the effective p-value of the many-T-tests analysis. [We could have done a Bonferroni correction when doing multiple T-tests, which is a fancy way of saying “for m tests, look for significance at α/m".]
+
+    For T-tests between each pair of sorting implementations, we would run 21 tests in total. This can be calculated using the formula C(7,2), where there are 7 sorting implementations:
+
+    C(7,2) = 7!/(2!(7-2)!) = 21
+
+    If we were looking for p < 0.05 in these 21 tests, the probability of having any false conclusions by chance is increased. The effective p-value for running multiple T-tests can be calculated by dividing the threshold p-value by the number of tests (Bonferroni correction):
+
+    Adjusted p-value = 0.05 / 21 ≈ 0.0024
+
+    This adjusted value shows that we would need to be more stringent in declaring statistical significance to reduce the chances of false positives.
+
+3. Give a ranking of the sorting implementations by speed, including which ones could not be distinguished. (i.e. which pairs could our experiment not conclude had different running times?)
+
+    The output I got from my analysis:
+
+    Sorting implementations and respective mean of their speed:
+
+    qs1               0.000712
+    qs2               0.000773
+    qs3               0.000766
+    qs4               0.000633
+    qs5               0.000622
+    merge1            0.000550
+    partition_sort    0.000428
+    dtype: float64
+
+    Sorting implementations and their respective rank (Ascending):
+
+    partition_sort    1.0
+    merge1            2.0
+    qs5               3.0
+    qs4               4.0
+    qs1               5.0
+    qs3               6.0
+    qs2               7.0
+    dtype: float64
+
+    ANOVA results:
+
+    F_onewayResult(statistic=1095.0445639200284, pvalue=0.0)
+
+    ANOVA p-value: 0.0
+
+    Multiple Comparison of Means - Tukey HSD results:
+
+    --------------------------------------------------------------------
+        group1         group2     meandiff p-adj   lower   upper  reject
+    --------------------------------------------------------------------
+            merge1 partition_sort  -0.0001    0.0 -0.0001 -0.0001   True
+            merge1            qs1   0.0002    0.0  0.0001  0.0002   True
+            merge1            qs2   0.0002    0.0  0.0002  0.0002   True
+            merge1            qs3   0.0002    0.0  0.0002  0.0002   True
+            merge1            qs4   0.0001    0.0  0.0001  0.0001   True
+            merge1            qs5   0.0001    0.0  0.0001  0.0001   True
+    partition_sort            qs1   0.0003    0.0  0.0003  0.0003   True
+    partition_sort            qs2   0.0003    0.0  0.0003  0.0004   True
+    partition_sort            qs3   0.0003    0.0  0.0003  0.0004   True
+    partition_sort            qs4   0.0002    0.0  0.0002  0.0002   True
+    partition_sort            qs5   0.0002    0.0  0.0002  0.0002   True
+            qs1            qs2   0.0001    0.0     0.0  0.0001   True
+            qs1            qs3   0.0001    0.0     0.0  0.0001   True
+            qs1            qs4  -0.0001    0.0 -0.0001 -0.0001   True
+            qs1            qs5  -0.0001    0.0 -0.0001 -0.0001   True
+            qs2            qs3     -0.0 0.8986    -0.0     0.0  False
+            qs2            qs4  -0.0001    0.0 -0.0002 -0.0001   True
+            qs2            qs5  -0.0002    0.0 -0.0002 -0.0001   True
+            qs3            qs4  -0.0001    0.0 -0.0001 -0.0001   True
+            qs3            qs5  -0.0001    0.0 -0.0002 -0.0001   True
+            qs4            qs5     -0.0  0.301    -0.0     0.0  False
+    --------------------------------------------------------------------
+
+    From the above output, the ranking of the sorting implementations from fastest to slowest would be:
+
+    - Fastest: partition_sort, followed by merge1, qs5, qs4, qs1, qs3, and slowest: qs2.
+
+    According to the Tukey HSD results, qs2 and qs3 form one pair, and qs4 and qs5 form another pair that could not be distinguished based on their running times, meaning their performance differences were not statistically significant.
