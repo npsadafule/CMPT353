@@ -1,0 +1,7 @@
+1. Are the residuals close enough to being normal to look at the OLS p-value? Can you reasonably conclude that the ratings are increasing?
+
+    The p-value from the regression is very small (1.5139606492960758e-106), which means there is strong evidence that the slope is not zero. While the p-value is not exactly zero, it is small enough to be considered significant. By looking at the plot of residuals and the p-value, it seems that the residuals are close enough to being normally distributed. This makes it reasonable to use the p-value to draw conclusions. Since the slope is positive, we can say that the ratings have been increasing over time.
+
+2. Do you think that the new “better” prediction is letting the Kalman filter do a better job capturing the true signal in the noise?
+
+    Yes, in this case, the new prediction is helping the Kalman filter do a better job of capturing the real signal from the noise. This is likely because the features used in the prediction are better represented, which helps the Kalman filter more accurately track the true trend while reducing noise. By improving the initial prediction, the Kalman filter can better smooth out the data and show the true trend over time.
