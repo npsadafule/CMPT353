@@ -1,0 +1,27 @@
+1. How long did your reddit_averages.py take with:
+   (1) The reddit-0 dataset and effectively no work: 29.549s
+        real    0m29.549s
+        user    0m27.587s
+        sys     0m2.368s
+
+   (2) No schema specified and not caching (reddit-2b): 39.133s
+        real    0m39.133s
+        user    0m34.747s
+        sys     0m2.715s
+
+   (3) With a schema but not caching (reddit-2b): 36.109s
+        real    0m36.109s
+        user    0m29.221s
+        sys     0m2.571s
+
+   (4) With both a schema and caching the twice-used DataFrame (reddit-2b): 34.623s
+        real    0m34.623s
+        user    0m41.718s
+        sys     0m3.206s
+
+2. Based on the above, does it look like most of the time taken to process the reddit-2b dataset is in reading the files, or calculating the averages?
+   Most of the time appears to be spent in reading the files, especially when Spark has to refer the schema like seen in  difference between Experiment 2 and Experiment 3. Specifying the schema reduces overhead, and caching helps reduce the redundant calculations, but the impact is smaller compared to schema inference.
+
+3. Where did you use .cache() in your wikipedia_popular.py? [Hint: the answer had better be “once”… but where?]
+     I used .cache() after creating the filtered_pages DataFrame, because filtered_pages is used multiple times, once to compute max_requests_per_hour and once for the join operation. Caching filtered_pages would allow Spark to store this DataFrame in memory, avoiding redundant recomputations and improving performance.
+
