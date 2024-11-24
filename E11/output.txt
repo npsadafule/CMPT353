@@ -1,0 +1,12 @@
+nsadaful@pmp-gateway:~$ time spark-submit --conf spark.dynamicAllocation.enabled=false --num-executors=8 \
+reddit_relative.py /courses/353/reddit-3 output_default
+
+real    1m1.484s
+user    0m49.933s
+sys     0m3.621s
+
+nsadaful@pmp-gateway:~$ time spark-submit --conf spark.dynamicAllocation.enabled=false --num-executors=8 --conf spark.sql.adaptive.autoBroadcastJoinThreshold=-1 reddit_relative.py /courses/353/reddit-3 output_no_broadcast
+
+real    1m4.242s
+user    0m48.487s
+sys     0m3.995s

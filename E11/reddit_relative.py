@@ -32,9 +32,51 @@ comments_schema = types.StructType([
 def main(in_directory, out_directory):
     comments = spark.read.json(in_directory, schema=comments_schema)
 
-    # TODO
+    #Calculate the average score for each subreddit
+    subreddit_avg = comments.groupBy('subreddit').agg(
+        functions.avg('score').alias('avg_score')
+    ).filter(functions.col('avg_score') > 0)
 
-    #best_author.write.json(out_directory, mode='overwrite')
+    # Cache the average score DataFrame
+    #subreddit_avg = subreddit_avg.cache().hint('broadcast')
+    subreddit_avg = subreddit_avg
+
+    #Join the average score to the comments to calculate the relative score
+    comments_alias = comments.alias('c')
+    subreddit_avg_alias = subreddit_avg.alias('a')
+
+    comments_with_avg = comments_alias.join(
+        subreddit_avg_alias,
+        on='subreddit'
+    ).withColumn('rel_score', functions.col('c.score') / functions.col('a.avg_score'))
+
+    #Determine the maximum relative score for each subreddit
+    max_rel_score_per_subreddit = comments_with_avg.groupBy('subreddit').agg(
+        functions.max('rel_score').alias('max_rel_score')
+    )
+
+    # Cache the max relative score DataFrame
+    #max_rel_score_per_subreddit = max_rel_score_per_subreddit.cache().hint('broadcast')
+    max_rel_score_per_subreddit = max_rel_score_per_subreddit
+
+    #Join again to get the author of the best comment in each subreddit
+    comments_with_avg_alias = comments_with_avg.alias('c')
+    max_rel_score_alias = max_rel_score_per_subreddit.alias('m')
+
+    best_author = comments_with_avg_alias.join(
+        max_rel_score_alias,
+        on=[
+            comments_with_avg_alias['subreddit'] == max_rel_score_alias['subreddit'],
+            comments_with_avg_alias['rel_score'] == max_rel_score_alias['max_rel_score']
+        ]
+    ).select(
+        comments_with_avg_alias['subreddit'],
+        comments_with_avg_alias['author'],
+        comments_with_avg_alias['rel_score']
+    )
+
+    # Write the output in JSON
+    best_author.write.json(out_directory, mode='overwrite')
 
 
 if __name__=='__main__':
